@@ -40,3 +40,12 @@ yarn dev
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Plugins
+
+### CSS
+1.-@emotion/core
+2.-@emotion/styled
+3.-babel-plugin-emotion
+4.-@emotion/babel-preset-css-prop
+5.- Normalize [cdn](https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css)
