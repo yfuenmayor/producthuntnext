@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router';
 // Dependencia para subir files a firebase
 import FileUploader from 'react-firebase-file-uploader';
 import Layout from "../components/layout/Layout";
+import Error404 from '../components/layout/Error404';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 // VALIDACIONES FORM //
 // Hooks de Validacion de formularios
@@ -12,7 +13,7 @@ import validarCrearProducto from '../rulesValidation/validarCrearProducto';
 // Imprtamos el context para su uso
 import { FirebaseContext } from '../firebase';
 
-
+ 
 const STATE_FORM = {
   nombre: '',
   empresa: '',
@@ -88,7 +89,12 @@ const NuevoProducto = () => {
           urlimagen,
           votos: 0,
           comentarios: [],
-          fechaAlta: Date.now()
+          fechaAlta: Date.now(),
+          creador: {
+            id: usuario.uid,
+            nombre: usuario.displayName
+          },
+          votantes: []
       }
         
       //Guardando en la DB de firebase
@@ -101,6 +107,7 @@ const NuevoProducto = () => {
   return (
     <div>
       <Layout>
+        { !usuario ? <Error404 /> : (
         <>
           <h1 className="titulo">Iniciar Sesión</h1>
           <Formulario
@@ -116,7 +123,7 @@ const NuevoProducto = () => {
                   type="text" 
                   name="nombre" 
                   id="nombre"
-                  placeholder="Tu Nombre"
+                  placeholder="Nombre del producto"
                   value={ nombre}
                   onChange={ handleChange }
                   onBlur={handleBlur}
@@ -188,6 +195,7 @@ const NuevoProducto = () => {
             <InputSubmit type="submit" value="Crear Producto"/>
           </Formulario>
         </>
+        )}
       </Layout>
     </div>
   )

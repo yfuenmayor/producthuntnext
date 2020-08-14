@@ -1,39 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import Layout from "../components/layout/Layout";
-//Context
-import { FirebaseContext } from '../firebase';
 import Producto from '../components/layout/Producto';
-
+//Hooks que trae la lista de productos segun orden especifico
+import useProductosLista from '../hooks/useProductosLista';
 
 const Home = () => {
 
-    // STATES //
-    const [productos, setProductos] = useState([]);
-
-    // CONTEXT //
-    const { firebase } = useContext(FirebaseContext);
-
-    // USEEFFECTS //
-    useEffect(() => {
-      const obtenerProductos = () => {
-        firebase.db.collection('productos').orderBy('fechaAlta', 'desc').onSnapshot(manejarSnapshot);
-      }
-      obtenerProductos();
-    }, []);
-
-    //Funcion que trae y selecciona los registros de firebase
-    function manejarSnapshot(snapshot){
-      const productos = snapshot.docs.map( doc => {
-        return {
-          id: doc.id,
-          ...doc.data()
-        }
-      });
-      //Guardamos los productos en el state
-      setProductos(productos);
-    }
-
-
+  const { productos } = useProductosLista('fechaAlta');
+    
   return (
     <>
       <Layout>
