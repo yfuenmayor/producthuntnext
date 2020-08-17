@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext} from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-// import { es } from 'date-fns/locale';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { es } from 'date-fns/locale';
 // Importamos el CONTEXT
 import { FirebaseContext } from '../../firebase';
 //Componentes creados para formularios
@@ -198,8 +198,8 @@ const Producto = () => {
 
                 <ContenedorProducto>
                     <div>
-                        {/* <p>Publicado hace: {formatDistanceToNow( new Date(fechaAlta), { locale: es }) }</p> */}
-                        <p>Publicado hace: {fechaAlta} por {creador.nombre}</p>
+                        <p>Publicado hace: {formatDistanceToNow( new Date(fechaAlta), { locale: es }) }</p>
+                        {/* <p>Publicado hace: {fechaAlta} por {creador.nombre}</p> */}
 
                         <img src={urlimagen} />
                         <p>{descripcion}</p>
